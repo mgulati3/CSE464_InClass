@@ -5,6 +5,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BankAccountTest {
     @Test
+    void negativeWithdrawalMustNeverIncreaseBalance() {
+        BankAccount account = new BankAccount(100);
+        try {
+            account.withdraw(-10);
+        } catch (IllegalArgumentException expected) {
+            // Rejection is valid; independently verify that state is preserved.
+        }
+        assertEquals(100, account.getBalance(),
+                "A negative withdrawal must never credit the account");
+    }
+
+    @Test
     void startsWithInitialBalance() {
         assertEquals(100, new BankAccount(100).getBalance());
         assertEquals(0, new BankAccount(0).getBalance());
