@@ -24,7 +24,7 @@ public final class BankAccount {
     }
 
     public void withdraw(long amount) {
-        if (amount <= 0) {
+        if (amount == 0) {
             throw new IllegalArgumentException("Withdrawal must be positive");
         }
         if (amount > balance) {
